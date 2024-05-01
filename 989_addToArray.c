@@ -4,43 +4,51 @@
 #include <stdlib.h>
 #include <limits.h>
 
-int digit(long int n)
+int *addElement(int *array, int n, int elem)
 {
-    if (n>=0 && n<=9)
+    int *newArray = (int *)malloc((n + 1) * sizeof(int));
+    newArray[0] = elem;
+    for (int i = 0; i < n; i++)
     {
-        return 1;
+        newArray[i + 1] = array[i];
     }
-    else
-    {
-        return (1 + digit(n/10));
-    }
-    
+    free(array);
+    return newArray;
 }
 
-int* addToArrayForm(int* num, int numSize, int k, int* returnSize) {
-    // long int sum = 0;
-    // for (int i = 0; i < numSize; i++)
-    // {
-    //     sum = sum*10 + num[i];
-    // }
-    // long int result = sum+k;
-    // int digits = digit(result);
-    // *returnSize = digits;
+int *addToArrayForm(int *num, int numSize, int k, int *returnSize)
+{
+    int n = k;
 
-    // int* resultArr = (int*)malloc(digits*sizeof(int));
-    // int rem;
-    // for (int i = (digits - 1); i >= 0; i--)
-    // {
-    //     rem = result%10;
-    //     resultArr[i] = rem;
-    //     result /= 10;
-    // }
-    // return resultArr;
-    int sum = 0, carry = 0;
-    
+    int i = numSize - 1;
+    while (i >= 0 || n > 0)
+    {
+        int sum = ((i >= 0) ? num[i] : 0) + (n % 10);
+        n /= 10;
+
+        if (i >= 0)
+        {
+            num[i] = sum % 10;
+        }
+        else
+        {
+            num = addElement(num, numSize, sum % 10);
+            numSize++;
+        }
+
+        if (sum >= 10)
+        {
+            n++;
+        }
+
+        i--;
+    }
+
+    *returnSize = numSize;
+    return num;
 }
 
-void printArr(int* arr, int size)
+void printArr(int *arr, int size)
 {
     for (int i = 0; i < size; i++)
     {
@@ -49,12 +57,13 @@ void printArr(int* arr, int size)
     printf("\n");
 }
 
-void main(){
-    // system("cls");
-    int num[] = {0};
-    int k = 10000;
-    int size = sizeof(num)/sizeof(int);
-    // printf("%d", addToArrayForm(num, size, k, &size));
-    int* result = addToArrayForm(num, size, k, &size);
-    printArr(result, size);
+void main()
+{
+    system("cls");
+    int num[] = {1, 2, 6, 3, 0, 7, 1, 7, 1, 9, 7, 5, 6, 6, 4, 4, 0, 0, 6, 3};
+    int k = 516, retSize;
+    int size = sizeof(num) / sizeof(int);
+    int *result = addToArrayForm(num, size, k, &retSize);
+    printArr(result, retSize);
+    free(result);
 }
