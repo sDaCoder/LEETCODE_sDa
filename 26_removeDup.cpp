@@ -3,26 +3,31 @@
 #include <stdlib.h>
 using namespace std;
 
-int removeDuplicates(vector<int> &nums)
+class Solution
 {
-    int j;
-    for (int i = 0; i < nums.size() - 1; i++)
-    {
-        j = i + 1;
-        while (j < nums.size())
+    public:
+        int removeDuplicates(vector<int> &nums)
         {
-            if (nums[j] == nums[i])
+            int j;
+            for (int i = 0; i < nums.size() - 1; i++)
             {
-                nums.erase(nums.begin() + j);
+                j = i + 1;
+                while (j < nums.size())
+                {
+                    if (nums[j] == nums[i])
+                    {
+                        nums.erase(nums.begin() + j);
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
             }
-            else
-            {
-                break;
-            }
+            return nums.size();
         }
-    }
-    return nums.size();
-}
+
+};
 
 int main()
 {
@@ -30,7 +35,8 @@ int main()
     // cout<<"It's SDA"<<endl;
     vector<int> nums = {0, 0, 1, 1, 1, 2, 2, 3, 3, 4, 4, 5, 6, 6, 6, 6};
     int size = sizeof(nums) / sizeof(int);
-    int result = removeDuplicates(nums);
+    Solution s;
+    int result = s.removeDuplicates(nums);
 
     // for(auto i = nums.begin(); i != nums.end(); i++) cout<<*i<<" ";
     for (auto i : nums) cout << i << " ";
