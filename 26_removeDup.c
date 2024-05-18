@@ -53,9 +53,10 @@ int removeDuplicates(int* nums, int numsSize) {
                 nums = del(nums, &numsSize, j);
                 count++;
             }
+            else break;
         }
     }
-    return count;
+    return (numsSize - count);
 }
 
 int main(){
@@ -71,7 +72,7 @@ int main(){
     }
     
     printf("%d\n", removeDuplicates(nums, numsSize));
-    printArr(nums, numsSize);
+    // printArr(nums, numsSize);
     free(nums);
     return 0;
 }
