@@ -47,30 +47,28 @@ void swap(int* a, int* b)
 }
 
 struct ListNode* sortList(struct ListNode* head) {
-    struct ListNode* i = head;
+    struct ListNode* i;
     struct ListNode* index;
-    struct ListNode* j = head->next;
+    struct ListNode* j;
 
-    while (i->next != NULL)
+    for(i = head; i->next != NULL; i = i->next)
     {
         index = i;
-        while (j != NULL)
+        for(j = i->next; j != NULL; j = j->next)
         {
             if (index->val > j->val)
             {
                 index = j;
             }
-            j = j->next;
         }
         swap(&(index->val), &(i->val));
-        i = i->next;
     }
     return head;
 }
 
 void main(){
     system("cls");
-    int arr[] = {4, 2, 1, 3};
+    int arr[] = {4, 3, 2, 1};
     int size = sizeof(arr) / sizeof(int);
 
     struct ListNode *head = NULL;
