@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        "*.ejs": "html",
-        "stdlib.h": "c",
-        "stdbool.h": "c",
-        "limits.h": "c",
-        "ostream": "cpp"
-    }
-}
