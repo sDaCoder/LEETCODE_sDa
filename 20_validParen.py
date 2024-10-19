@@ -13,6 +13,8 @@ class Solution:
             return False
     
     def isValid(self, s: str) -> bool:
+        if len(s) % 2 != 0:
+            return False
         for i in s:
             if i in ['(', '[', '{']:
                 self.stack.append(i)
