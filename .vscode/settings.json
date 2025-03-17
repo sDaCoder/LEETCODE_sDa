@@ -3,6 +3,8 @@
         "*.ejs": "html",
         ".env*": "dotenv",
         "ostream": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "vector": "cpp",
+        "iosfwd": "cpp"
     }
 }
