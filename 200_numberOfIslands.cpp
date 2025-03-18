@@ -60,12 +60,9 @@ class Solution {
             int deli = dir[0];
             int delj = dir[1];
             if(
-                m + deli >= 0 && 
-                m + deli < rows &&
-                n + delj >= 0 &&
-                n + delj < cols &&
-                grid[m + deli][n + delj] == '1' &&
-                !visited[m + deli][n + delj]
+                m + deli >= 0 && m + deli < rows &&
+                n + delj >= 0 && n + delj < cols &&
+                grid[m + deli][n + delj] == '1' && !visited[m + deli][n + delj]
             ) 
             DFSTraverse({m + deli, n + delj}, visited, grid);
         }
@@ -90,18 +87,18 @@ class Solution {
 
     void DFSStack(pair<int, int> node, vector<vector<bool>>& visited, vector<vector<char>>& grid)
     {
-        int m = node.first;
-        int n = node.second;
         visited[node.first][node.second] = true;
         stack<pair<int, int>> S;
         S.push(node);
         int rows = grid.size();
         int cols = grid[0].size();
-
+        
         while (!S.empty())
         {
             pair<int, int> P = S.top();
             S.pop();
+            int m = P.first;
+            int n = P.second;
 
             for(vector<int> dir: directions)
             {
