@@ -7,15 +7,16 @@ public class CitySmallestNeighbours1334 {
             {0, 1, 3}, {1, 2, 1}, {1, 3, 4}, {2, 3, 1}
         };
         int distanceThreshold = 4;
-        for (int[] rows : findTheCity(n, edges, distanceThreshold)) {
-            for (int el : rows) {
-                System.out.print(el + " ");
-            }
-            System.out.println();
-        }
+        System.out.println(findTheCity(n, edges, distanceThreshold));
+        // for (int[] rows : findTheCity(n, edges, distanceThreshold)) {
+        //     for (int el : rows) {
+        //         System.out.print(el + " ");
+        //     }
+        //     System.out.println();
+        // }
     }
 
-    public static int[][] findTheCity(int n, int[][] edges, int distanceThreshold) {
+    public static int findTheCity(int n, int[][] edges, int distanceThreshold) {
         int distMatrix[][] = new int[n][n];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -41,6 +42,24 @@ public class CitySmallestNeighbours1334 {
                 }
             }
         }
-        return distMatrix;
+
+        int city = -1, minCities = Integer.MAX_VALUE;
+
+        for (int i = 0; i < n; i++) {
+            int countCities = 0;
+            for (int j = 0; j < n; j++) {
+                if (distMatrix[i][j] <= distanceThreshold) {
+                    countCities++;
+                }
+            }
+            if (countCities < minCities) {
+                minCities = countCities;
+                city = i;
+            }
+            else if (countCities == minCities) {
+                city = Math.max(city, i);
+            }
+        }
+        return city;
     }
 }
